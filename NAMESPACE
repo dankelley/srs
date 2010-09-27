@@ -1,0 +1,15 @@
+export(
+       l2p,
+       plot.srs,
+       p2l,
+       read.srs,
+       sort.by.GPA,
+       sort.by.name,
+       subset.srs,
+       summary.srs,
+       trimtime,
+       write.srs
+)
+S3method(plot, srs)
+S3method(summary, srs)
+S3method(write, srs)

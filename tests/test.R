@@ -1,0 +1,5 @@
+library(sr)
+library(grid)
+x <- read.sr("grades.dat")
+summary(x)
+plot(x)

@@ -1,0 +1,12 @@
+Package: srs
+Version: 0.1
+Date: 2010-09-27
+Title: Student Records System
+Author: Dan Kelley <Dan.Kelley@Dal.Ca>
+Maintainer: Dan Kelley <Dan.Kelley@Dal.Ca>
+Depends: R (>= 0.99), grid
+Description: Read, summarize, and analyze student-record data.
+License: GPL (>= 2)
+URL: http://myweb.dal.ca/kelley/pub/sof/sr/index.php
+LazyLoad: yes
+Packaged: Dan Kelley

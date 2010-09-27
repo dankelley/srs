@@ -1,0 +1,14 @@
+0.14   - NO CHANGES YET
+0.13   - Add trim.sr(); add scheme B to p2l
+0.12   - Fix bug in subset.sr() ... NB new numbering scheme
+0.1.11 - Rename sort.sr() to avoid conflicts with generics.
+0.1.10 - Rewrite print.sr() to make it produce a clean table.
+0.1.9  - Rewrite read.sr() to make it immune to bugs present in 0.1.8
+0.1.8  - Add write.sr()
+0.1.7  - Trying scheme for plotting sub-text (commented out though)
+0.1.6  - ?
+0.1.5  - Add presentation and publication info
+0.1.4  - Add C.I. to grades
+0.1.3  - Add ug option to plot.sr()
+0.1.2  - Nicer graphics
+0.1.1  - Initial version

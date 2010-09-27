@@ -1,0 +1,7 @@
+library(sr)
+library(grid)
+data(sr)
+summary(sr)
+sr.sorted <- sort.by.GPA(sr)
+summary(sr.sorted)
+plot(sr.sorted)
