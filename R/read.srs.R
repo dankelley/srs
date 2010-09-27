@@ -20,7 +20,7 @@ read.srs <- function(file="fake.dat", debug=FALSE ,silent=FALSE, year.start=0)
             if (debug) cat(paste("student at line ", i, "\n"))
             nstudent <- nstudent + 1
             program <- ""
-            months <- NA
+            enrolled <- NA
             scholarships <- NULL
             prizes <- NULL
             presentations <- NULL
@@ -38,18 +38,15 @@ read.srs <- function(file="fake.dat", debug=FALSE ,silent=FALSE, year.start=0)
                 if (lines[i] == "Student") {
                     i <- i - 1
                     break;
-                }
-                else if (lines[i] == "Program") {
+                } else if (lines[i] == "Program") {
                     if (n <= (i <- i + 1)) stop(paste(file,":",i," ERROR: no Program data"))
                     program <- trim(lines[i])
                     if(debug)cat(paste(file,":", i, " gives 'Program' as '", program, "'\n", sep=""))
-                }
-                else if (lines[i] == "Months") {
+                } else if (lines[i] == "Enrolled") {
                     if (n <= (i <- i + 1)) stop(paste(file,":",i," ERROR: no Months data"))
-                    months <- as.numeric(trim(lines[i]))
-                    if(debug)cat(paste(file,":", i, " gives 'Months' as '", months, "'\n", sep=""))
-                }
-                else if (lines[i] == "Scholarships") {
+                    enrolled <- as.POSIXct(trim(lines[i]))
+                    if(debug)cat(paste(file,":", i, " gives enrolment time as", format(enrolled), "'\n", sep=""))
+                } else if (lines[i] == "Scholarships") {
                     if(debug)cat(paste(file,":",i, " is 'Scholarships'\n",sep=""))
                     while (n >= (i <- i + 1)) {
                         if (0<length(grep(iws, lines[i]))) {
@@ -60,8 +57,7 @@ read.srs <- function(file="fake.dat", debug=FALSE ,silent=FALSE, year.start=0)
                             break;
                         }
                     }
-                }
-                else if (lines[i] == "Prizes") {
+                } else if (lines[i] == "Prizes") {
                     if(debug)cat(paste(file,":",i, " is 'Prizes'\n",sep=""))
                     while (n >= (i <- i + 1)) {
                         if (0<length(grep(iws, lines[i]))) {
@@ -175,7 +171,7 @@ read.srs <- function(file="fake.dat", debug=FALSE ,silent=FALSE, year.start=0)
                     if(debug)cat(paste(file,":",i,"is the end of a student record\n"))
                     res[[nstudent]] <- list(name=name,
                                             program=program,
-                                            months=months,
+                                            enrolled=enrolled,
                                             scholarships=scholarships,
                                             prizes=prizes,
                                             presentations=presentations,

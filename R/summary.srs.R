@@ -4,10 +4,10 @@ summary.srs <- function(object, ...)
         stop("method is only for srs objects")
     n <- length(object)
     for (i in 1:n) {
-        info <- sprintf("%20s %3s/%3.0f GPA %.2f=%.2f/%.0f Presentations %d  Published %d  In-Press %d  Submitted %d  In-prep %d",
+        info <- sprintf("%15s | %3s | MIP %3.2f | GPA %.2f (%.2f/%.0f) | Presentations %d | Published %d | In-Press %d | Submitted %d | In-prep %d",
                         object[[i]]$name,
                         object[[i]]$program,
-                        object[[i]]$months,
+                        difftime(Sys.Date(), as.POSIXct(object[[i]]$enrolled), "days")/30,
                         mean(object[[i]]$grades$point),
                         sum(object[[i]]$grades$point),
                         length(object[[i]]$grades$point),

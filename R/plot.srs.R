@@ -35,9 +35,14 @@ plot.srs <- function(x, gleft=1.7, skip.presentations=FALSE, skip.inprep=TRUE, s
 
         ##grid.text(x[[i]]$name, x=0.9, y=y, gp=gpar(cex=1.4, col=colours[1]), default.units="native", just="right")
 
+        mip <- if (is.na(x[[i]]$enrolled))
+            " ? MIP"
+        else
+            sprintf(" %.0f MIP", difftime(Sys.Date(), as.POSIXct(x[[i]]$enrolled), "days")/30)
+
         info <- paste(x[[i]]$name, "\n",
                       if (nchar(x[[i]]$program) > 0) x[[i]]$program else "",
-                      if (!is.na(x[[i]]$months)) paste("/", x[[i]]$months, "\n") else "",
+                      mip, "\n",
                       sprintf("GPA %.2f (= %.2f / %.0f)",
                               mean(x[[i]]$grades$point), sum(x[[i]]$grades$point), nc), sep="")
         ##info <- paste(info, "\n")
