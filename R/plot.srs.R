@@ -18,13 +18,13 @@ plot.srs <- function(x, gleft=1.7, skip.presentations=FALSE, skip.inprep=TRUE, s
     pushViewport(rvp)
     glen <- length(g)
     for (i in 1:glen) {
-        if (g[i] < 3.7)	grid.lines(c(g[i],g[i]),ys,gp=gpar(col="darkgray", lwd=2),default.unit="native")
-        else            grid.lines(c(g[i],g[i]),ys,gp=gpar(col="darkgray",lwd=2),default.unit="native")
+        if (g[i] < 3.7)	grid.lines(c(g[i],g[i]),ys,gp=gpar(col="darkgray", lwd=2),default.units="native")
+        else            grid.lines(c(g[i],g[i]),ys,gp=gpar(col="darkgray",lwd=2),default.units="native")
         grid.text(l[i],g[i],ys[1]+.1,default.units="native",gp=gpar(cex=cex)) # 1.5
         grid.text(l[i],g[i],ys[2]-.1,default.units="native",gp=gpar(cex=cex)) # 1.5
     }
     for (i in 1:n)
-        grid.lines(c(g[1],g[glen]),i,default.unit="native",gp=gpar(col="darkgray",lwd=3))
+        grid.lines(c(g[1],g[glen]),i,default.units="native",gp=gpar(col="darkgray",lwd=3))
     upViewport()
 
     for (i in 1:n) {                    # Student by student
@@ -121,13 +121,13 @@ plot.srs <- function(x, gleft=1.7, skip.presentations=FALSE, skip.inprep=TRUE, s
         }
         ## cross
         mean <- mean(x[[i]]$grades$point)
-        grid.lines(c(mean,mean),c(i-0.5/n,i+0.5/n),default.unit="native", gp=gpar(col="blue",alpha=0.6,lwd=6))
+        grid.lines(c(mean,mean),c(i-0.5/n,i+0.5/n),default.units="native", gp=gpar(col="blue",alpha=0.6,lwd=6))
         if (!quiet) print(i-0.5/n)
         tt <- try(t.test(x[[i]]$grades$point), silent=TRUE)
         if (class(tt) != "try-error") {
             ci <- tt$conf.int
             ci[2] <- min(ci[2], 4.3)
-            grid.lines(ci, rep(i,2),default.unit="native", gp=gpar(col="blue",alpha=0.6,lwd=6))
+            grid.lines(ci, rep(i,2),default.units="native", gp=gpar(col="blue",alpha=0.6,lwd=6))
         }
         upViewport()
     }

@@ -2,7 +2,7 @@
 \alias{plot.srs}
 \title{Plot student records}
 \description{Plot student records}
-\usage{plot.srs(x, gleft=1.7, skip.presentations=FALSE, skip.inprep=TRUE,
+\usage{\method{plot}{srs}(x, gleft=1.7, skip.presentations=FALSE, skip.inprep=TRUE,
 skip.communications=FALSE, jitter=FALSE, colours=c("blue"), quiet=TRUE, ...)}
 \arguments{
 \item{x}{An srs object.}

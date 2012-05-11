@@ -2,7 +2,7 @@
 \alias{subset.srs}
 \title{Subset student records}
 \description{Subset student records}
-\usage{subset.srs(x, subset, ...)}
+\usage{\method{subset}{srs}(x, subset, ...)}
 \arguments{
   \item{x}{An sr object.}
   \item{subset}{Subset to keep (indices).}  

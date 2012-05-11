@@ -2,7 +2,7 @@
 \alias{summary.srs}
 \title{Summarize student records}
 \description{Summarize student records }
-\usage{summary.srs(object, ...)}
+\usage{\method{summary}{srs}(object, ...)}
 \arguments{
   \item{object}{An \code{srs} object.}
   \item{...}{Extra options handed below.}
