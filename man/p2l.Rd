@@ -14,16 +14,16 @@ Scheme A
 
 \tabular{rl}{
 Percent \tab     Letter Grade \cr
-95-100 	\tab     A+           \cr
-90-94   \tab 	 A            \cr
-82-89   \tab 	 A-           \cr
-77-81   \tab 	 B+           \cr
-72-76   \tab 	 B            \cr
-67-71   \tab 	 B-           \cr
-64-66   \tab 	 C+           \cr
-60-63   \tab 	 C            \cr
-56-59   \tab 	 C-           \cr
-50-55   \tab 	 D            \cr
+90-100 	\tab     A+           \cr
+85-89.9 \tab 	 A            \cr
+80-84.9 \tab 	 A-           \cr
+75-79.9 \tab 	 B+           \cr
+70-74.9 \tab 	 B            \cr
+65-69.9 \tab 	 B-           \cr
+62-64.9 \tab 	 C+           \cr
+58-61.9 \tab 	 C            \cr
+55-57.9 \tab 	 C-           \cr
+50-54.9 \tab 	 D            \cr
  0-49   \tab     F            \cr
 }
 

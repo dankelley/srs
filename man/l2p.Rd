@@ -4,20 +4,18 @@
 \description{
   Convert letter grade to point value or percent value.
 }
-\usage{
-l2p(l, scale=4.3)
-}
+\usage{ l2p(l, scale=100) }
 \arguments{
   \item{l}{Letter grade.}
   \item{scale}{A value indicating the type of scale, e.g. 4.3 for
                a conventional GPA-type calculation, or
                100 for percentage calculations (see below).}
 }
-\details{
-  Convert letter grade to a "point" scale.  If scale is 4.3
-  or 100, then the grades are taken from the appropriate
-  column below.  For any other scale, the grades are linearly
-  scaled from the second column.
+
+\details{Convert letter grade to a "point" scale.  If scale is 4.3 or 100, then
+    the grades are taken from the appropriate column below.  For any other
+    scale, the grades are linearly scaled from the second column.
+
   \preformatted{
   A+  4.3  97
   A   4.0  92
