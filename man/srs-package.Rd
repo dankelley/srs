@@ -13,7 +13,7 @@ as follows.
 library(grid) # need this for graphs
 library(srs)
 data(srs)
-srs.sorted <- sort.by.GPA(srs)
+srs.sorted <- sortByGPA(srs)
 plot(srs.sorted)
 srs10 <- subset.srs(srs.sorted, 1:10)
 plot(srs10)

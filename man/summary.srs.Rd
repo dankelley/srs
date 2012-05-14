@@ -9,7 +9,7 @@
 }
 \details{Summarize student records.}
 \value{None.}
-\seealso{\code{\link{sort.by.GPA}}, \code{\link{sort.by.name}}, \code{\link{read.srs}}, \code{\link{plot.srs}}}
+\seealso{\code{\link{sortByGPA}}, \code{\link{sortByName}}, \code{\link{read.srs}}, \code{\link{plot.srs}}}
 \examples{
 library(srs)
 data(srs)

@@ -1,8 +1,8 @@
-\name{sort.by.GPA}
-\alias{sort.by.GPA}
+\name{sortByGPA}
+\alias{sortByGPA}
 \title{Sort student records by GPA}
 \description{Sort student records by GPA}
-\usage{sort.by.GPA(x, decreasing=FALSE, ...)}
+\usage{sortByGPA(x, decreasing=FALSE, ...)}
 \arguments{
   \item{x}{An srs object.}
   \item{decreasing}{Sort direction.}
@@ -13,10 +13,10 @@
 \examples{
 library(srs)
 data(srs)
-srs.s <- sort.by.GPA(srs)
+srs.s <- sortByGPA(srs)
 summary(srs.s)
 plot(srs.s)
 }
-\seealso{\code{\link{sort.by.name}}, \code{\link{read.srs}}, \code{\link{plot.srs}}}
+\seealso{\code{\link{sortByName}}, \code{\link{read.srs}}, \code{\link{plot.srs}}}
 \author{Dan Kelley \email{Dan.Kelley@Dal.Ca}}
 \keyword{misc}
