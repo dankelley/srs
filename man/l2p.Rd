@@ -16,24 +16,21 @@
     the grades are taken from the appropriate column below.  For any other
     scale, the grades are linearly scaled from the second column.
 
-  \preformatted{
-  A+  4.3  97
-  A   4.0  92
-  A-  3.7  85
-  B+  3.3  79
-  B   3.0  74
-  B-  2.7  69
-  C+  2.3  65
-  C   2.0  61
-  C-  1.7  57
-  D+  1.3  54
-  D   1.0  52
-  D-  0.7  50
-  F   0.0  25
+\tabular{rl}{
+Percent \tab     Letter Grade \cr
+90-100 	\tab     A+           \cr
+85-89.9 \tab 	 A            \cr
+80-84.9 \tab 	 A-           \cr
+75-79.9 \tab 	 B+           \cr
+70-74.9 \tab 	 B            \cr
+65-69.9 \tab 	 B-           \cr
+62-64.9 \tab 	 C+           \cr
+58-61.9 \tab 	 C            \cr
+55-57.9 \tab 	 C-           \cr
+50-54.9 \tab 	 D            \cr
+ 0-49   \tab     F            \cr
 }
- NB. the second column is fairly conventional, at least for schools using the 
- "4.3" convention, but the third column is just one of many variants.  For
- example, surely a blank answer is worth less than 25% ... 
+
 }
 \value{A number, as described above.}
 
