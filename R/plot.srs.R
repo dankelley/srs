@@ -26,6 +26,7 @@ plot.srs <- function(x, gleft=1.7, skip.presentations=FALSE, skip.inprep=TRUE, s
     for (i in 1:n)
         grid.lines(c(g[1],g[glen]),i,default.units="native",gp=gpar(col="darkgray",lwd=3))
     upViewport()
+    haveAlpha <- "x11" != getOption("device")
 
     for (i in 1:n) {                    # Student by student
         pushViewport(lvp)
@@ -115,19 +116,22 @@ plot.srs <- function(x, gleft=1.7, skip.presentations=FALSE, skip.inprep=TRUE, s
                         yy <- y
                     else
                         yy <- y + seq(-0.1, 0.1, length.out=ng)
-                    grid.points(x[[i]]$grades$point[w],yy,pch=21,gp=gpar(fill="yellow",col="red",alpha=0.4,cex=1.2*cex, lwd=3))
+                    grid.points(x[[i]]$grades$point[w],yy,pch=21,
+                                gp=gpar(fill="yellow",col="red", alpha=if (haveAlpha) 0.4 else 1, cex=1.2*cex, lwd=3))
                 }
             }
         }
         ## cross
         mean <- mean(x[[i]]$grades$point)
-        grid.lines(c(mean,mean),c(i-0.5/n,i+0.5/n),default.units="native", gp=gpar(col="blue",alpha=0.6,lwd=6))
+        grid.lines(c(mean,mean),c(i-0.5/n,i+0.5/n),default.units="native", 
+                   gp=gpar(col="blue", alpha=if (haveAlpha) 0.6 else 1, lwd=6))
         if (!quiet) print(i-0.5/n)
         tt <- try(t.test(x[[i]]$grades$point), silent=TRUE)
         if (class(tt) != "try-error") {
             ci <- tt$conf.int
             ci[2] <- min(ci[2], 4.3)
-            grid.lines(ci, rep(i,2),default.units="native", gp=gpar(col="blue",alpha=0.6,lwd=6))
+            grid.lines(ci, rep(i,2),default.units="native",
+                       gp=gpar(col="blue", alpha=if (haveAlpha) 0.6 else 1, lwd=6))
         }
         upViewport()
     }
