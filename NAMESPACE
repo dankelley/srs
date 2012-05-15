@@ -1,4 +1,4 @@
-export(
+export(gradeMapping,
        l2p,
        plot.srs,
        p2l,
@@ -8,8 +8,7 @@ export(
        subset.srs,
        summary.srs,
        trimtime,
-       write.srs
-)
+       write.srs)
 S3method(plot, srs)
 S3method(summary, srs)
 S3method(write, srs)
