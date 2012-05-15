@@ -26,7 +26,8 @@ plot.srs <- function(x, gleft=1.7, skip.presentations=FALSE, skip.inprep=TRUE, s
     for (i in 1:n)
         grid.lines(c(g[1],g[glen]),i,default.units="native",gp=gpar(col="darkgray",lwd=3))
     upViewport()
-    haveAlpha <- !is.null(getOption('device')) && "x11" != getOption("device")
+
+    haveAlpha <- !is.null(getOption('device')) && "X11" != names(dev.cur())[1]
 
     for (i in 1:n) {                    # Student by student
         pushViewport(lvp)
