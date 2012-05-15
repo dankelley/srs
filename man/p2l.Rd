@@ -25,7 +25,7 @@
 
 \examples{
     library(srs)
-    p <- p2l(91) # A
+    cat("91 percent maps to", p2l(91), "\n")
 }
 
 \seealso{\code{\link{gradeMapping}}.}

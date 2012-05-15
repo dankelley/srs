@@ -27,6 +27,8 @@
     
 \examples{
 library(srs)
+data.frame(gradeMapping())
+data.frame(gradeMapping('B'))
 pA <- gradeMapping("A")
 pB <- gradeMapping("B")
 iA <- which(pA$letter=="A+") 
