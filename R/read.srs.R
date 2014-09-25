@@ -1,4 +1,4 @@
-read.srs <- function(file="fake.dat", debug=FALSE ,silent=FALSE, year.start=0)
+read.srs <- function(file="fake.dat", debug=FALSE, silent=FALSE, year.start=0)
 {
     trim <- function(string) { sub(iws,"",string) }
     lines <- readLines(file)
@@ -29,6 +29,7 @@ read.srs <- function(file="fake.dat", debug=FALSE ,silent=FALSE, year.start=0)
             papers.submitted <- NULL
             papers.inprep <- NULL
             grades <- NULL
+            notes <- ""
             if (n <= (i <- i + 1))
                 break
             name <- trim(lines[i])
@@ -43,7 +44,7 @@ read.srs <- function(file="fake.dat", debug=FALSE ,silent=FALSE, year.start=0)
                     program <- trim(lines[i])
                     if(debug)cat(paste(file,":", i, " gives 'Program' as '", program, "'\n", sep=""))
                 } else if (lines[i] == "Enrolled") {
-                    if (n <= (i <- i + 1)) stop(paste(file,":",i," ERROR: no Months data"))
+                    if (n <= (i <- i + 1)) stop(paste(file,":",i," ERROR: no Enrolled data"))
                     enrolled <- as.POSIXct(trim(lines[i]))
                     if(debug)cat(paste(file,":", i, " gives enrolment time as", format(enrolled), "'\n", sep=""))
                 } else if (lines[i] == "Scholarships") {
@@ -68,8 +69,7 @@ read.srs <- function(file="fake.dat", debug=FALSE ,silent=FALSE, year.start=0)
                             break;
                         }
                     }
-                }
-                else if (lines[i] == "Presentations") {
+                } else if (lines[i] == "Presentations") {
                     if(debug)cat(paste(file,":",i,"is 'Presentations'\n"))
                     while (n >= (i <- i + 1)) {
                         if (0<length(grep(iws, lines[i]))) {
@@ -80,8 +80,7 @@ read.srs <- function(file="fake.dat", debug=FALSE ,silent=FALSE, year.start=0)
                             break;
                         }
                     }
-                }
-                else if (lines[i] == "Papers published") {
+                } else if (lines[i] == "Papers published") {
                     if(debug)cat(paste(file,":",i," is 'Papers published'\n",sep=""))
                     while (n >= (i <- i + 1)) {
                         if (0<length(grep(iws, lines[i]))) {
@@ -92,8 +91,7 @@ read.srs <- function(file="fake.dat", debug=FALSE ,silent=FALSE, year.start=0)
                             break;
                         }
                     }
-                }
-                else if (lines[i] == "Papers in press") {
+                } else if (lines[i] == "Papers in press") {
                     if(debug)cat(paste(file,":",i," is 'Papers in press'\n",sep=""))
                     while (n >= (i <- i + 1)) {
                         if (0<length(grep(iws, lines[i]))) {
@@ -104,8 +102,7 @@ read.srs <- function(file="fake.dat", debug=FALSE ,silent=FALSE, year.start=0)
                             break;
                         }
                     }
-                }
-                else if (lines[i] == "Papers submitted") {
+                } else if (lines[i] == "Papers submitted") {
                     if(debug)cat(paste(file,":",i," is 'Papers submitted'\n",sep=""))
                     while (n >= (i <- i + 1)) {
                         if (0<length(grep(iws, lines[i]))) {
@@ -116,8 +113,7 @@ read.srs <- function(file="fake.dat", debug=FALSE ,silent=FALSE, year.start=0)
                             break;
                         }
                     }
-                }
-                else if (lines[i] == "Papers in preparation") {
+                } else if (lines[i] == "Papers in preparation") {
                     if(debug)cat(paste(file,":",i," is 'Papers in preparation'\n",sep=""))
                     while (n >= (i <- i + 1)) {
                         if (0<length(grep(iws, lines[i]))) {
@@ -128,8 +124,7 @@ read.srs <- function(file="fake.dat", debug=FALSE ,silent=FALSE, year.start=0)
                             break;
                         }
                     }
-                }
-                else if (lines[i] == "Grades") {
+                } else if (lines[i] == "Grades") {
                     if(debug)cat(paste(file,":",i," is 'Grades'\n",sep=""))
                     course <- NULL
                     year <- NULL
@@ -166,8 +161,17 @@ read.srs <- function(file="fake.dat", debug=FALSE ,silent=FALSE, year.start=0)
                             }
                         }
                     }
-                }
-                else if (substr(lines[i], 1, 4) == "----") {
+                } else if (lines[i] == "Notes") {
+                    if(debug)cat(paste(file,":",i, " is 'Notes'\n",sep=""))
+                    while (n >= (i <- i + 1)) {
+                        if (0<length(grep(iws, lines[i]))) {
+                            notes <- paste(notes, "    ", trim(lines[i]))
+                        } else {
+                            i <- i - 1 # so we can catch the data in next pass
+                            break;
+                        }
+                    }
+                } else if (substr(lines[i], 1, 4) == "----") {
                     if(debug)cat(paste(file,":",i,"is the end of a student record\n"))
                     res[[nstudent]] <- list(name=name,
                                             program=program,
@@ -179,7 +183,8 @@ read.srs <- function(file="fake.dat", debug=FALSE ,silent=FALSE, year.start=0)
                                             papers.inpress=papers.inpress,
                                             papers.submitted=papers.submitted,
                                             papers.inprep=papers.inprep,
-                                            grades=grades)
+                                            grades=grades,
+                                            notes=notes)
                     if (!silent) cat(paste("\t",name, ": gpa=", mean(point),"\n",sep=""))
                     if (i == n) {
                         if(debug)cat(paste(file,":",i," this file seems to be well-formed\n",sep=""))

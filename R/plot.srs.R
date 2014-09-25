@@ -1,5 +1,5 @@
 library(grid)
-plot.srs <- function(x, gleft=1.7, skip.presentations=FALSE, skip.inprep=TRUE, skip.communications=FALSE, jitter=FALSE, colours=c("blue"), quiet=TRUE, ...)
+plot.srs <- function(x, gleft=1.7, skip.presentations=TRUE, skip.inprep=TRUE, skip.communications=FALSE, jitter=FALSE, colours=c("blue"), quiet=TRUE, ...)
 {
     if (!inherits(x, "srs"))
         stop("method is only for srs objects")
@@ -38,14 +38,14 @@ plot.srs <- function(x, gleft=1.7, skip.presentations=FALSE, skip.inprep=TRUE, s
         ##grid.text(x[[i]]$name, x=0.9, y=y, gp=gpar(cex=1.4, col=colours[1]), default.units="native", just="right")
 
         mip <- if (is.na(x[[i]]$enrolled))
-            " ? MIP"
+            " ? mon total"
         else
-            sprintf(" %.0f MIP", difftime(Sys.Date(), as.POSIXct(x[[i]]$enrolled), "days")/30)
+            sprintf(" %.0f mon total", difftime(Sys.Date(), as.POSIXct(x[[i]]$enrolled), "days")/30)
 
         info <- paste(x[[i]]$name, "\n",
                       if (nchar(x[[i]]$program) > 0) x[[i]]$program else "",
                       mip, "\n",
-                      sprintf("GPA %.2f (= %.2f / %.0f)",
+                      sprintf("%.2f %% (= %.2f / %.0f)",
                               mean(x[[i]]$grades$point), sum(x[[i]]$grades$point), nc), sep="")
         ##info <- paste(info, "\n")
                                         # Scholarships
@@ -60,23 +60,22 @@ plot.srs <- function(x, gleft=1.7, skip.presentations=FALSE, skip.inprep=TRUE, s
         ##info <- paste(info, "\n")
                                         # Presentations
         if (skip.presentations) {
-            if (skip.inprep) communications <- sprintf("%d pub + %d inpress + %d sub",
-                                                       length(x[[i]]$papers.published),
+            if (skip.inprep) communications <- sprintf("%d pub/acc + %d sub",
+                                                       length(x[[i]]$papers.published)+
                                                        length(x[[i]]$papers.inpress),
                                                        length(x[[i]]$papers.submitted))
-            else communications <- sprintf("%d pub + %d inpress + %d sub + %d inprep",
-                                           length(x[[i]]$papers.published),
-                                           length(x[[i]]$papers.inpress),
+            else communications <- sprintf("%d pub/acc + %d sub + %d inprep",
+                                           length(x[[i]]$papers.published)+
                                            length(x[[i]]$papers.submitted),
                                            length(x[[i]]$papers.inprep))
         } else {
-            if (skip.inprep) communications <- sprintf("%d pub + %d inpress + %d sub\n%d presentations",
-                                                       length(x[[i]]$papers.published),
+            if (skip.inprep) communications <- sprintf("%d pub/acc + %d sub\n%d presentations",
+                                                       length(x[[i]]$papers.published)+
                                                        length(x[[i]]$papers.inpress),
                                                        length(x[[i]]$papers.submitted),
                                                        length(x[[i]]$presentations))
-            else communications <- sprintf("%d pub, %d inpress + %d sub + %d inprep\n%d presentations",
-                                           length(x[[i]]$papers.published),
+            else communications <- sprintf("%d pub/acc + %d sub + %d inprep\n%d presentations",
+                                           length(x[[i]]$papers.published)+
                                            length(x[[i]]$papers.inpress),
                                            length(x[[i]]$papers.submitted),
                                            length(x[[i]]$papers.inprep),
@@ -107,18 +106,16 @@ plot.srs <- function(x, gleft=1.7, skip.presentations=FALSE, skip.inprep=TRUE, s
         if (jitter) {
             xg <- jitter(x[[i]]$grades$point, amount=0.03)
             yg <- jitter(rep(y, length(xg)),amount=0.4/n)
-            grid.points(xg,yg,pch=21,gp=gpar(fill="yellow",col="red",cex=1.2*cex, lwd=3))
+            #grid.points(xg,yg,pch=21,gp=gpar(fill="yellow",col="red",cex=1.2*cex, lwd=3))
+            grid.points(xg,yg,gp=gpar(col="red",cex=1.2*cex, lwd=3))
         } else {
             for (grade in g) {
                 w <- x[[i]]$grades$point == grade
                 ng <- sum(w)
                 if (ng > 0) {
-                    if (ng ==1)
-                        yy <- y
-                    else
-                        yy <- y + seq(-0.1, 0.1, length.out=ng)
+                    yy <- y + if (ng ==1) 0 else  seq(-0.1, 0.1, length.out=ng)
                     grid.points(x[[i]]$grades$point[w],yy,pch=21,
-                                gp=gpar(fill="yellow",col="red", alpha=if (haveAlpha) 0.4 else 1, cex=1.2*cex, lwd=3))
+                                gp=gpar(fill="yellow",col="red", cex=1.2*cex, lwd=3))
                 }
             }
         }

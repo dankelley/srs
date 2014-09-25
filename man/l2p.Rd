@@ -16,8 +16,8 @@
 \details{Convert percent to letter grade using one particular scheme.  (More
     may be added later.)
     \itemize{
-        \item Scheme A: Dalhousie undergraduate percentage scheme.
-        \item Scheme B: Dalhousie undergraduate grade-point scheme.
+        \item Scheme A: Dalhousie undergraduate grade-point scheme.
+        \item Scheme B: Dalhousie undergraduate percentage scheme (changes over time).
     }
 }
 
