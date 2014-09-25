@@ -185,7 +185,7 @@ read.srs <- function(file="fake.dat", debug=FALSE, silent=FALSE, year.start=0)
                                             papers.inprep=papers.inprep,
                                             grades=grades,
                                             notes=notes)
-                    if (!silent) cat(paste("\t",name, ": gpa=", mean(point),"\n",sep=""))
+                    if (!silent) cat(paste("\t",name, ": gpa=", round(mean(point), 2), "\n",sep=""))
                     if (i == n) {
                         if(debug)cat(paste(file,":",i," this file seems to be well-formed\n",sep=""))
                         break
