@@ -165,7 +165,7 @@ read.srs <- function(file="fake.dat", debug=FALSE, silent=FALSE, year.start=0)
                     if(debug)cat(paste(file,":",i, " is 'Notes'\n",sep=""))
                     while (n >= (i <- i + 1)) {
                         if (0<length(grep(iws, lines[i]))) {
-                            notes <- paste(notes, "    ", trim(lines[i]))
+                            notes <- paste(notes, "    ", trim(lines[i]), "\n")
                         } else {
                             i <- i - 1 # so we can catch the data in next pass
                             break;
